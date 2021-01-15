@@ -60,6 +60,7 @@ function App() {
               return response.json();
             }).then(function (data) {
               console.log('Created Gist:', data);
+              settodos(data)
             });
           }}
         >Submit</button>
