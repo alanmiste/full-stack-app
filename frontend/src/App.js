@@ -1,12 +1,16 @@
 import logo from './logo.svg';
 import './App.css';
-import {useEffect} from "react"
+import {useState, useEffect} from "react"
 
 function App() {
+  const [todos, settodos] = useState([])
   useEffect(()=>{
     fetch("http://localhost:4000/")
     .then(res => res.json())
-    .then(res => console.log(res))
+    .then(res =>    { 
+      settodos(res)
+      console.log(res)
+    })
   },[])
   return (
     <div className="App">
@@ -23,6 +27,11 @@ function App() {
         >
           Learn React
         </a>
+        {todos.map(todo=>(
+          <div>
+            {todo.title}
+          </div>
+        ))}
       </header>
     </div>
   );
