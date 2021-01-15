@@ -84,8 +84,19 @@ app.get('/todos/:id', function (req, res) { // :id is resulting in req.params.id
 })
 
 app.post('/todos', function (req, res) { // POST endpoint for creating new todos
-    console.log(req.body) // POST requests can have a body - with req.body you can get the body
-    res.send('Got a POST request') // finising the response with a message
+    console.log(req.body.title) // POST requests can have a body - with req.body you can get the body
+    const newTodo = {
+        title: req.body.title,
+        completed: false,
+        id: todos.length+1
+    }
+    todos.push(newTodo)
+    console.log(todos)
+
+    // push new todo object to todos
+    //send the new todo list back to the client with res.json()
+    //res.send('Got a POST request') // how you can finising the response with a message
+    res.json(todos) //return automatically the data in JSOn format to the client
 })
 
 
