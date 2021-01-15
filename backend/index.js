@@ -20,14 +20,30 @@ const todos = [{
     id: 4
 }]
 const users = [
-    {id: 1, name: "Alan"},
-    {id: 2, name: "Tommy"}
+    { id: 1, name: "Alan" },
+    { id: 2, name: "Tommy" }
 ]
+
+app.get('/', function (req, res) { //insecure from 3000 - because im on 4000
+    console.log("Hello World", Date.now());
+    res.json({ message: "Hello World" });
+})
+
 
 // seperate GET routes
 app.get('/users', function (req, res) { //insecure from 3000 - because im on 4000
     console.log("This is a users request", Date.now());
     res.json(users);
+})
+// seperate GET routes
+app.get('/search/:name', function (req, res) { //insecure from 3000 - because im on 4000
+    console.log("This is a users request", Date.now());
+    console.log(req.params.name);
+    const filteredUsers = users.filter((user) => (user.name.toLowerCase() === req.params.name.toLowerCase()))
+    if(filteredUsers.length === 0){
+        res.status('404')
+    }
+    res.json(filteredUsers);
 })
 
 //GET SINGLE USER
