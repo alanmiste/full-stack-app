@@ -3,6 +3,7 @@ import './App.css';
 import {useState, useEffect} from "react"
 
 function App() {
+  const [name, setname] = useState("")
   const [todos, settodos] = useState([])
   useEffect(()=>{
     fetch("http://localhost:4000/todos")
@@ -21,6 +22,7 @@ function App() {
       console.log(res)
     })
   },[])
+  console.log(name);
   return (
     <div className="App">
       <header className="App-header">
@@ -36,6 +38,17 @@ function App() {
         >
           Learn React
         </a>
+        <input 
+        id="searchuser" 
+        placeholder="Create user with name"
+        // controlled component needs a controlled value from getter
+        value={name}
+        // controlled component needs a setter
+        onChange={(event)=> {
+          setname(event.target.value)
+        }}
+        />
+        <button>Submit</button>
         {todos.map(todo=>(
           <div>
             {todo.title}
