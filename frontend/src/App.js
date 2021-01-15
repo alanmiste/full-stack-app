@@ -5,10 +5,19 @@ import {useState, useEffect} from "react"
 function App() {
   const [todos, settodos] = useState([])
   useEffect(()=>{
-    fetch("http://localhost:4000/")
+    fetch("http://localhost:4000/todos")
     .then(res => res.json())
     .then(res =>    { 
       settodos(res)
+      console.log(res)
+    })
+  },[])
+  const [users, setusers] = useState([])
+  useEffect(()=>{
+    fetch("http://localhost:4000/users")
+    .then(res => res.json())
+    .then(res =>    { 
+      setusers(res)
       console.log(res)
     })
   },[])
@@ -30,6 +39,11 @@ function App() {
         {todos.map(todo=>(
           <div>
             {todo.title}
+          </div>
+        ))}
+        {users.map(user=>(
+          <div>
+            {user.name}
           </div>
         ))}
       </header>

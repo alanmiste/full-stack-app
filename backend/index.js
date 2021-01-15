@@ -19,9 +19,20 @@ const todos = [{
     completed: false,
     id: 4
 }]
+const users = [
+    {name: "Alan"},
+    {name: "Tommy"}
+]
 
-app.get('/', function (req, res) { //insecure from 3000 - because im on 4000
-    console.log("This is a server request", Date.now());
+// seperate GET routes
+app.get('/users', function (req, res) { //insecure from 3000 - because im on 4000
+    console.log("This is a users request", Date.now());
+    res.json(users);
+})
+
+// curl http://localhost:4000/todos
+app.get('/todos', function (req, res) { //insecure from 3000 - because im on 4000
+    console.log("This is a todos request", Date.now());
     res.json(todos);
 })
 
