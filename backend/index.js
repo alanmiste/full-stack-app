@@ -20,8 +20,8 @@ const todos = [{
     id: 4
 }]
 const users = [
-    {name: "Alan"},
-    {name: "Tommy"}
+    {id: 1, name: "Alan"},
+    {id: 2, name: "Tommy"}
 ]
 
 // seperate GET routes
@@ -30,10 +30,33 @@ app.get('/users', function (req, res) { //insecure from 3000 - because im on 400
     res.json(users);
 })
 
+//GET SINGLE USER
+// curl http://localhost:4000/users/1    1 is the req.params.id
+app.get('/users/:id', function (req, res) { // :id is resulting in req.params.id for 
+    console.log("This is a users request", Date.now());
+    // read id from parameter 
+    // just send back that one todo
+    const whichUser = req.params.id
+    res.json(users[whichUser]);
+})
+
+//GET ALL TODOS
 // curl http://localhost:4000/todos
 app.get('/todos', function (req, res) { //insecure from 3000 - because im on 4000
     console.log("This is a todos request", Date.now());
+    // read id from query parameter send in the request
+    // just send back that one todo
     res.json(todos);
+})
+
+//GET SINGLE TODO
+// curl http://localhost:4000/todos/3    4 is the req.params.id
+app.get('/todos/:id', function (req, res) { // :id is resulting in req.params.id for 
+    console.log("This is a todos request", Date.now());
+    // read id from parameter 
+    // just send back that one todo
+    const whichTodo = req.params.id
+    res.json(todos[whichTodo]);
 })
 
 app.listen(4000)
