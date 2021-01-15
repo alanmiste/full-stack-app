@@ -1,6 +1,14 @@
 const express = require('express')
 var cors = require('cors')// this library allowes localhost:3000 connections
+var bodyParser = require('body-parser') // to acceess POST requests body - we need to parse it first 
 const app = express()
+
+// support parsing of application/json type post data
+app.use(bodyParser.json()); // Tell the bodyparser to use json
+
+//support parsing of application/x-www-form-urlencoded post data
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(cors())  //tell our app to use the library
 const todos = [{
     title: "Buy milk",
@@ -40,7 +48,7 @@ app.get('/search/:name', function (req, res) { //insecure from 3000 - because im
     console.log("This is a users request", Date.now());
     console.log(req.params.name);
     const filteredUsers = users.filter((user) => (user.name.toLowerCase() === req.params.name.toLowerCase()))
-    if(filteredUsers.length === 0){
+    if (filteredUsers.length === 0) {
         res.status('404')
     }
     res.json(filteredUsers);
@@ -75,4 +83,11 @@ app.get('/todos/:id', function (req, res) { // :id is resulting in req.params.id
     res.json(todos[whichTodo]);
 })
 
-app.listen(4000)
+app.post('/todos', function (req, res) { // POST endpoint for creating new todos
+    console.log(req.body) // POST requests can have a body - with req.body you can get the body
+    res.send('Got a POST request') // finising the response with a message
+})
+
+
+console.log("Server listening on 4000...")
+app.listen(4000) // finally kick off the server
