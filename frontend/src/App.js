@@ -26,6 +26,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+
+        {/* TODO Make a input for a coordinate data type. Latitute and longitude. 13.023123123, 52.232321321 */}
+        {/* TODO Send this two numbers or as one string (as you want) to a new endpoint on the server */}
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.

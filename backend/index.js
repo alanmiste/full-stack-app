@@ -100,5 +100,8 @@ app.post('/todos', function (req, res) { // POST endpoint for creating new todos
 })
 
 
+// TODO create a new endpoint for POST that accepts this geoposition
+// TODO implement mongodb (create model, create modelfields (lat, long)) and create  a new instance of that model when you  post to this endpoint
+// TODO respond with success
 console.log("Server listening on 4000...")
 app.listen(4000) // finally kick off the server
